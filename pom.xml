@@ -10,7 +10,6 @@
     <packaging>war</packaging>
 
     <name>ServletProject Maven Webapp</name>
-    <!-- FIXME change it to the project's website -->
 
     <properties>
         <tomcat.version>8.5.31</tomcat.version>
