@@ -1,5 +1,6 @@
 package com.inofd.controller;
 
+import com.inofd.entity.User;
 import com.inofd.service.UserService;
 
 import javax.servlet.ServletConfig;
@@ -25,6 +26,7 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         if (userService.checkUser(username, password)) {
+            session.setAttribute("username",username);
             response.sendRedirect("main.jsp");
         } else {
             info.add("用户名或密码错误");
