@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="ServletProjec">
-    <output-path>$PROJECT_DIR$/out/artifacts/ServletProjec</output-path>
+  <artifact type="exploded-war" name="ServletProject:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ServletProject_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
