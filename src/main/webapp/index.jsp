@@ -16,7 +16,7 @@
     function imgrestore() {
         var imgtag = document.getElementById("verfi");
         // 加上Date时间可以换验证码否则都是请求同一个验证码
-        imgtag.src = "/ServletProject_war_exploded/CapthaServlet?" + new Date().getTime();
+        imgtag.src = "/ServletProject_war_exploded/verifyServlet?" + new Date().getTime();
     }
 </script>
 <body>
@@ -28,7 +28,7 @@ ${sessionScope.info}
     Password: <input type="password" name="password">
     <br>
     验证码:<input type="text">
-    <img src="/ServletProject_war_exploded/CapthaServlet" align="verification" id="verfi">
+    <img src="/ServletProject_war_exploded/verifyServlet" id="verfi">
     <a href="javascript:imgrestore();">看不清？换个验证码</a><br>
     <input type="submit" value="Login">
 </form>
