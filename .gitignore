@@ -24,12 +24,3 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-.gitignore
-.idea/workspace.xml
-out/
-src/main/java/com/inofd/dao/
-src/main/java/com/inofd/entity/
-src/main/java/com/inofd/exception/
-src/main/java/com/inofd/service/
-src/main/webapp/WEB-INF/lib/
-src/test/
