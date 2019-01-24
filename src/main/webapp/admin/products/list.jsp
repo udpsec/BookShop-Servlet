@@ -119,33 +119,35 @@
 								<td width="8%" align="center">删除</td>
 							</tr>
 
-							
+							<c:forEach items="${book}" var="books">
 								<tr onmouseover="this.style.backgroundColor = 'white'"
 									onmouseout="this.style.backgroundColor = '#F5FAFE';">
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="23">1</td>
+										width="23">${books.id}</td>
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="18%">java编程思想</td>
+										width="18%">${books.name}</td>
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="8%">1200</td>
+										width="8%">${books.price}</td>
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center"
-										width="8%">100</td>
-									<td style="CURSOR: hand; HEIGHT: 22px" align="center">计算机</td>
+										width="8%">${books.pnum}</td>
+									<td style="CURSOR: hand; HEIGHT: 22px" align="center">${books.category}</td>
 									<td align="center" style="HEIGHT: 22px" width="7%"><a
-										href="${pageContext.request.contextPath}/admin/products/edit.jsp">
-											<img
-											src="${pageContext.request.contextPath}/admin/images/i_edit.gif"
-											border="0" style="CURSOR: hand"> </a>
+											href="${pageContext.request.contextPath}/admin/products/edit.jsp">
+										<img
+												src="${pageContext.request.contextPath}/admin/images/i_edit.gif"
+												border="0" style="CURSOR: hand"> </a>
 									</td>
 
 									<td align="center" style="HEIGHT: 22px" width="7%"><a
-										href="#">
-											<img
-											src="${pageContext.request.contextPath}/admin/images/i_del.gif"
-											width="16" height="16" border="0" style="CURSOR: hand">
+											href="#">
+										<img
+												src="${pageContext.request.contextPath}/admin/images/i_del.gif"
+												width="16" height="16" border="0" style="CURSOR: hand">
 									</a>
 									</td>
 								</tr>
+							</c:forEach>
+
 						
 						</table>
 					</td>

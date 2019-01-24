@@ -28,9 +28,9 @@
 		
 		
 		//商品管理的子目录添加
-		d.add(11,1,'商品查看','${pageContext.request.contextPath}/admin/products/list.jsp','','mainFrame');
-		
-		
+		d.add(11,1,'商品查看','${pageContext.request.contextPath}/findAll','','mainFrame');
+		d.add(12,1,'商品明细','${pageContext.request.contextPath}/admin/products/list.jsp','','mainFrame');
+
 		document.write(d);
 		//-->
 	</script>

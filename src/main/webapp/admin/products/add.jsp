@@ -11,7 +11,7 @@
 
 <body>
 	<form id="userAction_save_do" name="Form1"
-		action="#" method="post"
+		action="AddBookServlet" method="post"
 		enctype="multipart/form-data">
 		&nbsp;
 		<table cellSpacing="1" cellPadding="5" width="100%" align="center"
