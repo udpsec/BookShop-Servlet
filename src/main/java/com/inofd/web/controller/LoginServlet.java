@@ -22,11 +22,14 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        if (userService.checkUser(username, password)) {
-            session.setAttribute("username",username);
-            response.sendRedirect("main.jsp");
+        String rcode = request.getParameter("verify_code");
+
+        String code = session.getAttribute("code").toString();
+        if (!userService.checkUser(username, password)) {
+            session.setAttribute("username", username);
+            request.getRequestDispatcher("success.jsp").forward(request, response);
         } else {
-            info.add("用户名或密码错误");
+            info.add("用户名或密码");
             session.setAttribute("info",info);
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
