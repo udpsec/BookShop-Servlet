@@ -119,7 +119,7 @@
 								<td width="8%" align="center">删除</td>
 							</tr>
 
-							<c:forEach items="${book}" var="books">
+							<c:forEach items="${requestScope.book}" var="books">
 								<tr onmouseover="this.style.backgroundColor = 'white'"
 									onmouseout="this.style.backgroundColor = '#F5FAFE';">
 									<td style="CURSOR: hand; HEIGHT: 22px" align="center"

@@ -27,7 +27,8 @@ ${sessionScope.info}
     <br>
     Password: <input type="password" name="password">
     <br>
-    验证码:<input type="text">
+    <input type="checkbox" name="remember" value="">记住用户名<br>
+    验证码:<input type="text" name="verify_code">
     <img src="${APP_PATH}/verifyServlet" id="verfi">
     <a href="javascript:imgrestore();">看不清？换个验证码</a><br>
     <input type="submit" value="Login">

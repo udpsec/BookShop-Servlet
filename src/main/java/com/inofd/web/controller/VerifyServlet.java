@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -25,6 +26,10 @@ public class VerifyServlet extends HttpServlet {
         response.setHeader("Program", "no-cache");
         response.setContentType("image/jpg");
         LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(100,40,5,120);
+        String code = lineCaptcha.getCode();
+        HttpSession session = request.getSession();
+        session.setAttribute("code",code);
+        session.setMaxInactiveInterval(60);
         ServletOutputStream sos = response.getOutputStream();
         lineCaptcha.write(sos);
         sos.flush();
