@@ -16,28 +16,33 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(name = "AddBookServlet",urlPatterns = {"/addBook"})
+@WebServlet(name = "AddBookServlet",urlPatterns = {"/AddBookServlet"})
 public class AddBookServlet extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         Books books = new Books();
-        Map<String, String[]> map = request.getParameterMap();
-        BookServiceImpl bookService = new BookServiceImpl();
         try {
-            BeanUtils.populate(books,map);
-            bookService.addBook(books);
-            request.getRequestDispatcher("/admin/products/list.jsp").forward(request,response);
+            BeanUtils.populate(books,request.getParameterMap());
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
             e.printStackTrace();
+        }
+        BookServiceImpl bookService = new BookServiceImpl();
+        bookService.addBook(books);
+        List<Entity> allBooks = null;
+        try {
+            allBooks = bookService.findAllBooks();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        request.setAttribute("book",allBooks);
+        request.getRequestDispatcher("/admin/products/list.jsp").forward(request,response);
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }
