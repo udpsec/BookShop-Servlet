@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.inofd.dao.OrderitemMapper">
+  <resultMap id="BaseResultMap" type="com.inofd.domain.Orderitem">
+    <id column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <id column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="buynum" jdbcType="INTEGER" property="buynum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_id, product_id, buynum
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from orderitem
+    where order_id = #{orderId,jdbcType=VARCHAR}
+      and product_id = #{productId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from orderitem
+    where order_id = #{orderId,jdbcType=VARCHAR}
+      and product_id = #{productId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.inofd.domain.Orderitem">
+    insert into orderitem (order_id, product_id, buynum
+      )
+    values (#{orderId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{buynum,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.inofd.domain.Orderitem">
+    insert into orderitem
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="buynum != null">
+        buynum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="buynum != null">
+        #{buynum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.inofd.domain.Orderitem">
+    update orderitem
+    <set>
+      <if test="buynum != null">
+        buynum = #{buynum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=VARCHAR}
+      and product_id = #{productId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.inofd.domain.Orderitem">
+    update orderitem
+    set buynum = #{buynum,jdbcType=INTEGER}
+    where order_id = #{orderId,jdbcType=VARCHAR}
+      and product_id = #{productId,jdbcType=VARCHAR}
+  </update>
+</mapper>
