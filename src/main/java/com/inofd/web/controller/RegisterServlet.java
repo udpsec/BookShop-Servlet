@@ -24,13 +24,10 @@ public class RegisterServlet extends HttpServlet {
         User user = new User();
         UserService userService = new UserService();
         Map<String, String[]> map = request.getParameterMap();
-        String email = request.getParameter("email");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        boolean email1 = Validator.isEmail(username);
-
         try {
             BeanUtils.populate(user,map);
+            boolean email = Validator.isEmail(user.getEmail());
+
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {

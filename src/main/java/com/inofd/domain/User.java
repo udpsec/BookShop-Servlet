@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 @Getter
 @Setter
@@ -11,12 +14,15 @@ import java.util.Date;
 public class User {
     private Integer id;
 
+    @NotNull(message = "用户名不能为空")
+    @Size(min = 0,max = 12,message = "用户名设置至少6位,最大12位")
     private String username;
-
+    @Size(min = 0,max = 12,message = "密码设置至少6位,最大12位")
     private String password;
 
     private String gender;
-
+    @NotNull(message = "邮件不能为空!")
+    @Email(message = "邮件格式不正确")
     private String email;
 
     private String telephone;
