@@ -3,6 +3,7 @@ package com.inofd.service;
 import com.inofd.dao.UserDao;
 import com.inofd.domain.User;
 
+import javax.validation.Valid;
 import java.sql.SQLException;
 
 public class UserService {

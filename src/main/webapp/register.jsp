@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -29,7 +30,9 @@
 				<tr>
 					<td style="padding:30px">
 						<h1>新会员注册</h1>
-						
+						<c:forEach items="${requestScope.error}" var="error">
+							<p>${error}</p>
+						</c:forEach>
 						<table width="70%" border="0" cellspacing="2" class="upline">
 							<tr>
 								<td style="text-align:right; width:20%">会员邮箱：</td>

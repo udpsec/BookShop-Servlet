@@ -17,7 +17,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 
-@WebServlet(name = "VerifyServlet", urlPatterns = {"/verifyServlet"})
+@WebServlet(name = "VerifyServlet", urlPatterns = {"/imageCode"})
 public class VerifyServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,7 +25,7 @@ public class VerifyServlet extends HttpServlet {
         response.setHeader("Control-Cache", "no-cache");
         response.setHeader("Program", "no-cache");
         response.setContentType("image/jpg");
-        LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(100,40,5,120);
+        LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(100,30,5,120);
         String code = lineCaptcha.getCode();
         HttpSession session = request.getSession();
         session.setAttribute("code",code);
