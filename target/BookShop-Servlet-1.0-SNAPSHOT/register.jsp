@@ -44,7 +44,7 @@
 							<tr>
 								<td style="text-align:right">会员名：</td>
 								<td>
-									<input type="text" class="textinput" name="username" />
+									<input type="text" class="textinput" name="username" />${checkname}
 								</td>
 								<td><font color="#999999">用户名设置至少6位</font></td>
 							</tr>
@@ -86,8 +86,8 @@
 						<table width="80%" border="0" cellspacing="2" class="upline">
 							<tr>
 								<td style="text-align:right; width:20%">输入校验码：</td>
-								<td style="width:50%"><input type="text" class="textinput" />
-								</td>
+								<td style="width:50%"><input type="text" class="textinput" name="code" />
+								<font color="red" size="6">${errorcode}</font></td>
 								<td>&nbsp;</td>
 							</tr>
 							<tr>

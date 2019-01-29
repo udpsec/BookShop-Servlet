@@ -2,14 +2,10 @@ package com.inofd.dao;
 
 import cn.hutool.db.Entity;
 import cn.hutool.db.Session;
-import cn.hutool.db.SqlConnRunner;
-import cn.hutool.db.ds.DSFactory;
 import com.inofd.domain.User;
-import com.inofd.utils.DruidUtils;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 public class UserDao implements UserMapper {
 
@@ -39,6 +35,26 @@ public class UserDao implements UserMapper {
 
     @Override
     public User selectByPrimaryKey(Integer id) {
+        return null;
+    }
+
+    @Override
+    public List<Entity> selectByUserName(String username) {
+        Session session = Session.create();
+        List<Entity> by = null;
+        try {
+            session.beginTransaction();
+            by = session.findBy("user", "username", username);
+            session.commit();
+            return by;
+        } catch (SQLException e) {
+            try {
+                session.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        }
         return null;
     }
 

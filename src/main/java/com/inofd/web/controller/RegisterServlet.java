@@ -1,6 +1,7 @@
 package com.inofd.web.controller;
 
-import cn.hutool.core.lang.Validator;
+import cn.hutool.core.lang.UUID;
+import cn.hutool.db.Entity;
 import com.inofd.domain.User;
 import com.inofd.service.UserService;
 import org.apache.commons.beanutils.BeanUtils;
@@ -14,7 +15,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.ValidatorFactory;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -35,34 +35,38 @@ public class RegisterServlet extends HttpServlet {
         javax.validation.Validator validator = factory.getValidator();
 
         try {
-            BeanUtils.populate(user,map);
+            BeanUtils.populate(user, map);
             Set<ConstraintViolation<User>> validate = validator.validate(user);
+            String scode = request.getSession().getAttribute("code").toString();
+            String code = request.getParameter("code");
+            List<Entity> i = userService.checkUserByName(user.getUsername());
+            if (!i.isEmpty()){
+                request.setAttribute("checkname", "用户名已存在");
+                request.getRequestDispatcher("register.jsp").forward(request, response);
+                return;
+            }
+            if (!scode.equalsIgnoreCase(code)) {
+                request.setAttribute("errorcode", "验证码错误");
+                request.getRequestDispatcher("register.jsp").forward(request, response);
+                return;
+            }
             if (validate.isEmpty()) {
+                user.setActivecode(UUID.fastUUID().toString());
+                user.setRole("普通用户");
                 userService.register(user);
-                request.getRequestDispatcher("registersuccess.jsp").forward(request,response);
-            }else {
+                request.getRequestDispatcher("registersuccess.jsp").forward(request, response);
+            } else {
                 for (ConstraintViolation<User> userConstraintViolation : validate) {
+
                     String message = userConstraintViolation.getMessage();
-                    request.setAttribute("error",message);
-                    request.getRequestDispatcher("register.jsp").forward(request,response);
+
+                    request.setAttribute("error", message);
+
+                    request.getRequestDispatcher("register.jsp").forward(request, response);
+
                 }
             }
-
- /*           boolean email = Validator.isEmail(user.getEmail());
-            boolean username = Validator.isGeneral(user.getUsername(),6,12);
-            boolean password = Validator.isGeneral(user.getPassword(),6,12);
-            boolean repassword = Validator.equal(user.getPassword(),request.getParameter("repassword").toString());
-            if (email) {
-                userService.register(user);
-                request.getRequestDispatcher("registersuccess.jsp").forward(request,response);
-            }else {
-                response.getWriter().write("不是邮箱");
-
-            }*/
-
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
