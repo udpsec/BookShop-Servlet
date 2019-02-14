@@ -59,7 +59,21 @@ public class UserDao implements UserMapper {
     }
 
     @Override
-    public int updateByPrimaryKeySelective(User record) {
+    public int updateByPrimaryKeySelective(String activicode) {
+        Session session = Session.create();
+        List<Entity> by = null;
+        try {
+            session.beginTransaction();
+            session.insertOrUpdate(Entity.create("user"),record.getActivecode());
+            session.commit();
+        } catch (SQLException e) {
+            try {
+                session.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        }
         return 0;
     }
 

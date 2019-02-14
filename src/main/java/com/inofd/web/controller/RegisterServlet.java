@@ -4,6 +4,7 @@ import cn.hutool.core.lang.UUID;
 import cn.hutool.db.Entity;
 import com.inofd.domain.User;
 import com.inofd.service.UserService;
+import com.inofd.utils.ValidatorUtils;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.ServletException;
@@ -24,18 +25,13 @@ import java.util.Set;
 public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=utf-8");
         User user = new User();
         UserService userService = new UserService();
-        Map<String, String[]> map = request.getParameterMap();
         ArrayList<String> error = new ArrayList<>();
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         javax.validation.Validator validator = factory.getValidator();
-
         try {
-            BeanUtils.populate(user, map);
+            BeanUtils.populate(user, request.getParameterMap());
             Set<ConstraintViolation<User>> validate = validator.validate(user);
             String scode = request.getSession().getAttribute("code").toString();
             String code = request.getParameter("code");
@@ -58,10 +54,9 @@ public class RegisterServlet extends HttpServlet {
             } else {
                 for (ConstraintViolation<User> userConstraintViolation : validate) {
 
-                    String message = userConstraintViolation.getMessage();
-
-                    request.setAttribute("error", message);
-
+                    StringBuffer buffer = new StringBuffer();
+                    buffer.append(userConstraintViolation.getMessage());
+                    request.setAttribute("error", buffer.toString());
                     request.getRequestDispatcher("register.jsp").forward(request, response);
 
                 }

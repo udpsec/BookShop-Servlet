@@ -19,4 +19,5 @@ public class UserService {
     public List<Entity> checkUserByName(String username){
         return userDao.selectByUserName(username);
     }
+    public List<Entity> activie(){}
 }
